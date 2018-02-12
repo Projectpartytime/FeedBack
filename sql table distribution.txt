@@ -1,0 +1,73 @@
+1-2-17
+@@@@@@@@@@@@@@@@@@@@@@@@@@
+babitha		TRAINING_MASTER
+laxmi		EMPLOYEE_MASTER
+chamu		COURSE_MASTER 
+vardhani	FEEDBACK_MASTER 
+bhagyashree	FACULTY_SKILL 
+ooha		TRAINING-PARTICIPANT_ENROLLMENT
+		
+
+****************************************************************
+
+babitha		TRAINING_MASTER
+
+CREATE TABLE TRAINING_MASTER
+(
+Training_Code Number(5) PRIMARY KEY,
+Course_Code number(5) REFERENCES COURSE_MASTER(Course_ID),
+Faculty_Code number(5) REFERENCES Employee_Master(employee_id) ,
+Start_Date Date,
+End_Date Date
+);
+
+
+
+
+*************************************************************
+
+
+
+laxmi		EMPLOYEE_MASTER
+
+CREATE TABLE EMPLOYEE_MASTER (EMPLOYEE_ID NUMBER(5) PRIMARY KEY,
+								EMPLOYEENAME VARCHAR(50),
+								PASSWORD VARCHAR(20),
+								ROLE VARCHAR(20)
+							);
+
+**************************************************************
+chamu		COURSE_MASTER 
+CREATE TABLE COURSE_MASTER
+		(Course_ID number(5) PRIMARY KEY,
+			Course_Name varchar2(50),
+			no_of_days number(5));
+
+
+***********************************************************************
+ooha		TRAINING-PARTICIPANT_ENROLLMENT
+
+CREATE TABLE PARTICIPANT_ENROLLMENT
+									(Training_code number(5) REFERENCES TRAINING_MASTER(Training_code),
+										Participant_id number(5) REFERENCES Employee_Master(EMPLOYEE_ID));
+
+***********************************************************************
+
+vardhani	FEEDBACK_MASTER
+
+CREATE TABLE feedback_master
+				(training_code NUMBER(5) REFERENCES TRAINING_MASTER(training_code),
+				participant_id NUMBER(5) REFERENCES employee_master(employee_id),
+				fb_prs_comm NUMBER(1),
+				fb_clrfy_dbts NUMBER(1),
+				fb_tm NUMBER(1),
+				fb_hand_out NUMBER(1),
+				fb_hw_sw_ntwrk NUMBER(1),
+				comments VARCHAR2(200),
+				suggestions VARCHAR2(200)); 
+***********************************************************			
+JOSHI, BHAGYASHREE:
+ 
+CREATE TABLE Faculty_Skill
+			(Faculty_id NUMBER(5) REFERENCES Employee_Master(employee_id),
+			Skill_Set VARCHAR2(200)); 
