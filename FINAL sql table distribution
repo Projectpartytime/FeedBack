@@ -1,0 +1,129 @@
+1-2-17
+@@@@@@@@@@@@@@@@@@@@@@@@@@
+babitha		TRAINING_MASTER
+laxmi		EMPLOYEE_MASTER
+chamu		COURSE_MASTER 
+vardhani	FEEDBACK_MASTER 
+bhagyashree	FACULTY_SKILL ------------REMOVED
+ooha		TRAINING-PARTICIPANT_ENROLLMENT
+		
+
+****************************************************************
+
+laxmi		EMPLOYEE_MASTER
+
+CREATE TABLE EMPLOYEE_MASTER (EMPLOYEE_ID NUMBER(5) PRIMARY KEY,
+								EMPLOYEE_NAME VARCHAR(50),
+								ROLE VARCHAR(20),
+								SKILL_SET VARCHAR2(200)
+							);
+
+							
+INSERT INTO employee_master
+values(42884,'Babitha','Participant','JAVA');
+
+INSERT INTO employee_master
+values(42958,'Jyothi','Coordinator','SAP');
+
+INSERT INTO employee_master
+values(42911,'Chamu','Participant','ORACLE');
+
+INSERT INTO employee_master
+values(42933,'Ooha','Participant','TESTING');
+
+INSERT INTO employee_master
+values(42962,'Vardhani','Participant','JAVA');
+
+INSERT INTO employee_master
+values(42889,'BhagyaShree','Partcipant','ORACLE');
+
+
+INSERT INTO employee_master
+values(42546,'SUDHESHNA','Admin','');
+**************************************************************
+chamu		COURSE_MASTER 
+CREATE TABLE COURSE_MASTER
+		(Course_ID number(5) PRIMARY KEY,
+			Course_Name varchar2(50),
+			no_of_days number(5));
+
+
+***********************************************************************
+babitha		TRAINING_MASTER
+
+CREATE TABLE TRAINING_MASTER
+(
+Training_Code Number(5) PRIMARY KEY,
+Course_Code number(5) REFERENCES COURSE_MASTER(Course_ID) ON DELETE CASCADE,
+Faculty_Code number(5) REFERENCES Employee_Master(employee_id) ON DELETE CASCADE ,
+Start_Date Date,
+End_Date Date
+);
+
+*************************************************************
+ooha		TRAINING-PARTICIPANT_ENROLLMENT
+
+CREATE TABLE PARTICIPANT_ENROLLMENT
+									(Training_code number(5) REFERENCES TRAINING_MASTER(Training_code),
+										Participant_id number(5) REFERENCES Employee_Master(EMPLOYEE_ID) ON DELETE CASCADE);
+
+***********************************************************************
+
+vardhani	FEEDBACK_MASTER
+
+CREATE TABLE feedback_master
+				(training_code NUMBER(5) REFERENCES TRAINING_MASTER(training_code) ON DELETE CASCADE,
+				participant_id NUMBER(5) REFERENCES employee_master(employee_id) ON DELETE CASCADE,
+				fb_prs_comm NUMBER(1),
+				fb_clrfy_dbts NUMBER(1),
+				fb_tm NUMBER(1),
+				fb_hand_out NUMBER(1),
+				fb_hw_sw_ntwrk NUMBER(1),
+				comments VARCHAR2(200),
+				suggestions VARCHAR2(200)); 
+***********************************************************	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+JOSHI, BHAGYASHREE:
+ 
+CREATE TABLE Faculty_Skill
+			(Faculty_id NUMBER(5) REFERENCES Employee_Master(employee_id),
+			Skill_Set VARCHAR2(200)); 
